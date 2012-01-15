@@ -7,12 +7,13 @@ class Pioneers < Formula
 
   depends_on 'intltool' # for NLS
   depends_on 'gettext'
+  depends_on 'librsvg' # svg images for gdk-pixbuf
   depends_on 'gtk+'
 
   def install
     # fix usage of echo options not supported by sh
     inreplace "Makefile.in", /\becho/, "/bin/echo"
-    system "./configure", "--disable-debug", "--disable-dependency-tracking",
+    system "./configure", "--enable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}"
     system "make install"
   end
